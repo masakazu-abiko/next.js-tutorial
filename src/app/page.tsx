@@ -1,106 +1,94 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const bookList = {
-  sidebarTitle: "MT書籍管理",
-  subTitle: "メニュー",
-  register: "貸出登録",
-  editLoan: "貸出編集",
-  bookList: "書籍一覧",
-  edit: "編集",
-  bookName: "書籍名",
-  isbn: "ISBN",
+  employeeId: "社員番号",
+  password: "パスワード",
+  login: "ログイン",
 };
 
-export default function HomePage() {
+export default function LoginPage() {
+  const router = useRouter();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    // ここでログイン認証処理を行う（仮で成功とする）
+    // 認証成功後に遷移
+    router.push("/List/bookList");
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-      {/* サイドバーとメインコンテンツ */}
       <div style={{ display: "flex", flex: 1 }}>
-        {/* サイドバー */}
-        <aside
-          style={{
-            width: "200px",
-            backgroundColor: "#333",
-            color: "white",
-            padding: "1rem",
-            height: "100%",
-          }}
-        >
-           <h1>{bookList.sidebarTitle}</h1>
-           <h2>{bookList.subTitle}</h2>
-          <ul style={{ listStyleType: "none", padding: 0 }}>
-            <li>
-              <Link href="/rental/add">
-                <button
-                  style={{
-                    backgroundColor: "white",
-                    color: "indigo",
-                    border: "none",
-                    padding: "10px 20px",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    marginBottom: "10px",
-                    width: "100%",
-                  }}
-                >
-                  {bookList.register}
-                </button>
-              </Link>
-            </li>
-            <li>
-              <Link href="/rental/edit">
-                <button
-                  style={{
-                    backgroundColor: "white",
-                    color: "indigo",
-                    border: "none",
-                    padding: "10px 20px",
-                    borderRadius: "5px",
-                    cursor: "pointer",
-                    width: "100%",
-                  }}
-                >
-                  {bookList.editLoan}
-                </button>
-              </Link>
-            </li>
-          </ul>
-        </aside>
+        {/* ログイン画面 */}
+        <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <form
+            onSubmit={handleLogin}
+            style={{
+              width: "300px",
+              padding: "2rem",
+              border: "1px solid #ccc",
+              borderRadius: "10px",
+              boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+              backgroundColor: "#f9f9f9",
+            }}
+          >
+            <h2 style={{ textAlign: "center", marginBottom: "20px", color: "gray" }}>
+              {bookList.login}
+            </h2>
 
-        {/* メインコンテンツ */}
-        <div style={{ flex: 1, padding: "1rem" }}>
-          <h1 style={{ color: "gray" }}>{bookList.bookList}</h1>
-          <hr style={{ borderColor: "#eee", borderWidth: "1px", margin: "8px 0" }} />
-          <div style={{ height: "16px" }}></div>
-          <table border="1" style={{ borderCollapse: "collapse", width: "50%" }}>
-            <thead style={{ backgroundColor: "#eee" }}>
-              <tr>
-              <th>{bookList.edit}</th>
-                <th>{bookList.bookName}</th>
-                <th>{bookList.isbn}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <button
-                    style={{
-                      backgroundColor: "transparent",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => alert("編集ボタンがクリックされました")}
-                  >
-                    ✏️
-                  </button>
-                </td>
-                <td>書籍名をここに記載</td>
-                <td>ISBNをここに記載</td>
-              </tr>
-            </tbody>
-          </table>
+            <div style={{ marginBottom: "15px" }}>
+              <label style={{ color: "gray", display: "block", marginBottom: "5px" }}>
+                {bookList.employeeId}
+              </label>
+              <input
+                type="text"
+                placeholder="社員番号を入力"
+                style={{
+                  width: "100%",
+                  padding: "8px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+
+            <div style={{ marginBottom: "20px" }}>
+              <label style={{ color: "gray", display: "block", marginBottom: "5px" }}>
+                {bookList.password}
+              </label>
+              <input
+                type="password"
+                placeholder="パスワードを入力"
+                style={{
+                  width: "100%",
+                  padding: "8px",
+                  borderRadius: "5px",
+                  border: "1px solid #ccc",
+                }}
+              />
+            </div>
+
+            <div style={{ textAlign: "center" }}>
+              <button
+                type="submit"
+                style={{
+                  backgroundColor: "green",
+                  color: "white",
+                  border: "none",
+                  padding: "10px 20px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  width: "100%",
+                }}
+              >
+                {bookList.login}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
